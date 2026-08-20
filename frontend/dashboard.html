@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Smart Event Finder</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+<nav class="navbar" id="main-navbar">
+  <div class="container">
+    <a href="index.html" class="brand">Smart<span class="dot">Event</span>Finder</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="events.html">Explore Events</a></li>
+      <li><a href="dashboard.html" class="active">Dashboard</a></li>
+      <li><a href="my-events.html">My Events</a></li>
+      <li><a href="saved-events.html">Saved</a></li>
+    </ul>
+    <div class="nav-actions" id="nav-actions"></div>
+    <button class="hamburger" id="hamburger-btn"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<header class="dashboard-header">
+  <div class="container">
+    <h1 id="welcome-heading">Welcome back!</h1>
+    <p>Here's what's happening with your events.</p>
+  </div>
+</header>
+
+<main class="container section" style="padding-top:0;">
+  <div class="stats-grid" id="stats-grid">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="section-head">
+    <h2>Upcoming Registered Events</h2>
+    <a href="my-events.html" class="link">View all →</a>
+  </div>
+  <div id="upcoming-registered-list"><div class="spinner"></div></div>
+
+  <div class="section-head mt-24">
+    <h2>Saved Events</h2>
+    <a href="saved-events.html" class="link">View all →</a>
+  </div>
+  <div id="saved-preview-grid" class="events-grid"><div class="spinner"></div></div>
+
+  <div class="section-head mt-24">
+    <h2>Recommended For You</h2>
+  </div>
+  <div id="recommended-grid" class="events-grid"><div class="spinner"></div></div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="bottom-bar">© 2026 Smart Event Finder. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/common.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>
