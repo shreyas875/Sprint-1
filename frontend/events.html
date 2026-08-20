@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explore Events — Smart Event Finder</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/events.css">
+</head>
+<body>
+
+<nav class="navbar" id="main-navbar">
+  <div class="container">
+    <a href="index.html" class="brand">Smart<span class="dot">Event</span>Finder</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="events.html" class="active">Explore Events</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="nav-actions" id="nav-actions"></div>
+    <button class="hamburger" id="hamburger-btn"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<main class="container section">
+  <div class="section-head">
+    <h2>Explore Events</h2>
+  </div>
+
+  <form class="search-bar mt-16" id="page-search-form" style="margin-bottom:24px; max-width:100%;">
+    <input type="text" id="search-input" placeholder="Search events by name, category, venue...">
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+
+  <div class="quick-filters">
+    <button class="quick-filter-btn" data-quick="near_me">📍 Near Me</button>
+    <button class="quick-filter-btn" data-quick="this_weekend">This Weekend</button>
+    <button class="quick-filter-btn" data-quick="free">Free Events</button>
+    <button class="quick-filter-btn" data-quick="clear">Clear Filters</button>
+  </div>
+
+  <div class="events-layout">
+    <aside class="filters-panel">
+      <h3>Filters</h3>
+
+      <div class="filter-group">
+        <label class="group-label">Category</label>
+        <select id="filter-category"><option value="">All Categories</option></select>
+      </div>
+
+      <div class="filter-group">
+        <label class="group-label">City</label>
+        <select id="filter-city">
+          <option value="">All Cities</option>
+          <option>Mumbai</option>
+          <option>Navi Mumbai</option>
+          <option>Pune</option>
+          <option>Bengaluru</option>
+          <option>Delhi</option>
+          <option>Hyderabad</option>
+          <option>Chennai</option>
+          <option>Kolkata</option>
+          <option>Ahmedabad</option>
+          <option>Jaipur</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label class="group-label">Date</label>
+        <select id="filter-date">
+          <option value="">Any Date</option>
+          <option value="today">Today</option>
+          <option value="tomorrow">Tomorrow</option>
+          <option value="this_weekend">This Weekend</option>
+          <option value="this_week">This Week</option>
+          <option value="this_month">This Month</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label class="group-label">Price</label>
+        <div class="filter-radio-group">
+          <label><input type="radio" name="price" value="" checked> Any Price</label>
+          <label><input type="radio" name="price" value="free"> Free</label>
+          <label><input type="radio" name="price" value="under_500"> Under ₹500</label>
+          <label><input type="radio" name="price" value="500_1000"> ₹500 – ₹1000</label>
+          <label><input type="radio" name="price" value="1000_plus"> ₹1000+</label>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <label class="group-label">Event Type</label>
+        <select id="filter-type">
+          <option value="">All Types</option>
+          <option value="ONLINE">Online</option>
+          <option value="OFFLINE">Offline</option>
+          <option value="HYBRID">Hybrid</option>
+        </select>
+      </div>
+
+      <button class="btn btn-outline btn-block" id="apply-filters-btn">Apply Filters</button>
+    </aside>
+
+    <div class="results-panel">
+      <div class="toolbar">
+        <span class="result-count" id="result-count">Loading...</span>
+        <select id="sort-select">
+          <option value="">Most Relevant</option>
+          <option value="newest">Newest</option>
+          <option value="date_asc">Date: Ascending</option>
+          <option value="price_low">Price: Low to High</option>
+          <option value="price_high">Price: High to Low</option>
+          <option value="popular">Most Popular</option>
+        </select>
+      </div>
+
+      <div class="events-grid" id="events-grid">
+        <div class="spinner"></div>
+      </div>
+
+      <div class="pagination" id="pagination"></div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="bottom-bar">© 2026 Smart Event Finder. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/common.js"></script>
+<script src="js/events.js"></script>
+</body>
+</html>
