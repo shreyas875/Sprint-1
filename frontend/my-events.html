@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Events — Smart Event Finder</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+<nav class="navbar" id="main-navbar">
+  <div class="container">
+    <a href="index.html" class="brand">Smart<span class="dot">Event</span>Finder</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="events.html">Explore Events</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="my-events.html" class="active">My Events</a></li>
+      <li><a href="saved-events.html">Saved</a></li>
+    </ul>
+    <div class="nav-actions" id="nav-actions"></div>
+    <button class="hamburger" id="hamburger-btn"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<main class="container section">
+  <div class="section-head"><h2>My Events</h2></div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="upcoming">Upcoming</button>
+    <button class="tab-btn" data-tab="past">Past Events</button>
+    <button class="tab-btn" data-tab="cancelled">Cancelled</button>
+  </div>
+
+  <div id="events-list"><div class="spinner"></div></div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="bottom-bar">© 2026 Smart Event Finder. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/common.js"></script>
+<script>
+let allRegistrations = [];
+let activeTab = 'upcoming';
+
+function rowHtml(reg) {
+  const image = reg.image_url || `https://picsum.photos/seed/event${reg.event_id}/200/150`;
+  const canCancel = reg.status === 'CONFIRMED' && new Date(reg.event_date) >= new Date().setHours(0,0,0,0);
+  return `
+    <div class="list-row">
+      <img src="${image}" alt="">
+      <div class="info">
+        <h4>${escapeHtml(reg.title)}</h4>
+        <p>📅 ${formatDate(reg.event_date)} · 📍 ${escapeHtml(reg.city)} · ${reg.ticket_quantity} ticket(s)</p>
+      </div>
+      <div class="actions">
+        <span class="badge ${reg.status === 'CANCELLED' ? 'badge-danger' : 'badge-success'}">${reg.status}</span>
+        <a href="event-details.html?id=${reg.event_id}" class="btn btn-outline btn-sm">View</a>
+        ${canCancel ? `<button class="btn btn-danger btn-sm" data-cancel-id="${reg.id}">Cancel</button>` : ''}
+      </div>
+    </div>
+  `;
+}
+
+function renderList() {
+  const container = document.getElementById('events-list');
+  const now = new Date().setHours(0,0,0,0);
+  let filtered = [];
+
+  if (activeTab === 'upcoming') {
+    filtered = allRegistrations.filter((r) => r.status === 'CONFIRMED' && new Date(r.event_date) >= now);
+  } else if (activeTab === 'past') {
+    filtered = allRegistrations.filter((r) => r.status === 'CONFIRMED' && new Date(r.event_date) < now);
+  } else {
+    filtered = allRegistrations.filter((r) => r.status === 'CANCELLED');
+  }
+
+  container.innerHTML = filtered.length
+    ? filtered.map(rowHtml).join('')
+    : `<div class="state-box"><h3>Nothing here yet.</h3><p>${activeTab === 'upcoming' ? 'Register for events to see them here.' : 'No events in this category.'}</p></div>`;
+
+  container.querySelectorAll('[data-cancel-id]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      if (!confirm('Cancel this registration? Your seat will be released.')) return;
+      const id = btn.getAttribute('data-cancel-id');
+      try {
+        await api.del(`/registrations/${id}`);
+        showToast('Registration cancelled.', 'success');
+        await loadRegistrations();
+      } catch (err) {
+        showToast(err.message, 'error');
+      }
+    });
+  });
+}
+
+async function loadRegistrations() {
+  try {
+    const res = await api.get('/registrations');
+    allRegistrations = res.data;
+    renderList();
+  } catch (err) {
+    document.getElementById('events-list').innerHTML = `<div class="state-box"><h3>Unable to load events.</h3><p>Please try again.</p></div>`;
+  }
+}
+
+document.querySelectorAll('.tab-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach((b) => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeTab = btn.getAttribute('data-tab');
+    renderList();
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (!requireAuth()) return;
+  loadRegistrations();
+});
+</script>
+</body>
+</html>
