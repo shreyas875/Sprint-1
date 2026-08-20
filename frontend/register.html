@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up — Smart Event Finder</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+<nav class="navbar" id="main-navbar">
+  <div class="container">
+    <a href="index.html" class="brand">Smart<span class="dot">Event</span>Finder</a>
+    <ul class="nav-links"></ul>
+    <div class="nav-actions" id="nav-actions"></div>
+  </div>
+</nav>
+
+<div class="auth-wrapper">
+  <div class="auth-card" style="max-width:480px;">
+    <h1>Create Your Account</h1>
+    <p class="subtitle">Join Smart Event Finder to discover events tailored to you.</p>
+
+    <form id="register-form">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" required placeholder="Your name">
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" required placeholder="you@example.com">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" placeholder="98XXXXXXXX">
+        </div>
+        <div class="form-group">
+          <label for="city">Preferred City</label>
+          <select id="city">
+            <option value="">Select city</option>
+            <option>Mumbai</option>
+            <option>Navi Mumbai</option>
+            <option>Pune</option>
+            <option>Bengaluru</option>
+            <option>Delhi</option>
+            <option>Hyderabad</option>
+            <option>Chennai</option>
+            <option>Kolkata</option>
+            <option>Ahmedabad</option>
+            <option>Jaipur</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" required minlength="6" placeholder="At least 6 characters">
+      </div>
+      <div class="form-group">
+        <label>Your Interests</label>
+        <div class="checkbox-pill-group" id="interests-container">
+          <span class="text-muted" style="font-size:0.8rem;">Loading interests...</span>
+        </div>
+      </div>
+      <p class="form-error" id="form-error"></p>
+      <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+    </form>
+
+    <p class="auth-switch">Already have an account? <a href="login.html">Login</a></p>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/common.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>
