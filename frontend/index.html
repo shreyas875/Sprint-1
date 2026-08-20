@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Event Finder — Discover Amazing Events Near You</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar" id="main-navbar">
+  <div class="container">
+    <a href="index.html" class="brand">Smart<span class="dot">Event</span>Finder</a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="events.html">Explore Events</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="nav-actions" id="nav-actions"></div>
+    <button class="hamburger" id="hamburger-btn"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <h1>Discover Amazing Events Near You</h1>
+    <p>Find concerts, workshops, conferences, sports, meetups and more — all in one place.</p>
+
+    <form class="search-bar" id="hero-search-form">
+      <input type="text" id="hero-search-input" placeholder="Search events...">
+      <select id="hero-location-select">
+        <option value="">All Locations</option>
+        <option>Mumbai</option>
+        <option>Navi Mumbai</option>
+        <option>Pune</option>
+        <option>Bengaluru</option>
+        <option>Delhi</option>
+        <option>Hyderabad</option>
+        <option>Chennai</option>
+        <option>Kolkata</option>
+        <option>Ahmedabad</option>
+        <option>Jaipur</option>
+      </select>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Popular Categories</h2>
+    </div>
+    <div class="categories-grid" id="categories-grid">
+      <div class="spinner"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Upcoming Events</h2>
+      <a href="events.html" class="link">View all →</a>
+    </div>
+    <div class="events-grid" id="upcoming-events-grid">
+      <div class="spinner"></div>
+    </div>
+  </section>
+
+  <section class="section" id="recommended-section" style="display:none;">
+    <div class="section-head">
+      <h2>Recommended For You</h2>
+    </div>
+    <div class="events-grid" id="recommended-events-grid"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Featured Events</h2>
+    </div>
+    <div class="events-grid" id="featured-events-grid">
+      <div class="spinner"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Smart Event Finder</h4>
+        <p>Discover, bookmark and register for events happening around you.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="events.html">All Events</a><br>
+        <a href="about.html">About Us</a><br>
+        <a href="register.html">Sign Up</a>
+      </div>
+      <div>
+        <h4>Categories</h4>
+        <a href="events.html?category=Technology">Technology</a><br>
+        <a href="events.html?category=Music">Music</a><br>
+        <a href="events.html?category=Business">Business</a>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <a href="about.html">Contact</a><br>
+        <a href="about.html">FAQs</a>
+      </div>
+    </div>
+    <div class="bottom-bar">© 2026 Smart Event Finder. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/common.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>
