@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — Smart Event Finder</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <div class="admin-brand">⚡ Admin Panel</div>
+    <a href="dashboard.html" class="active">📊 Dashboard</a>
+    <a href="events.html">🎟️ Events</a>
+    <a href="users.html">👥 Users</a>
+    <a href="registrations.html">📋 Registrations</a>
+    <a href="../index.html">↩ Back to Site</a>
+  </aside>
+
+  <main class="admin-main">
+    <div class="admin-toolbar">
+      <h1 style="margin:0;">Dashboard Overview</h1>
+      <div class="nav-actions" id="nav-actions"></div>
+    </div>
+
+    <div class="stats-grid" id="admin-stats-grid">
+      <div class="spinner"></div>
+    </div>
+
+    <div class="events-layout" style="grid-template-columns: 1fr 1fr; margin-top:32px;">
+      <div>
+        <h3 class="mt-16" style="margin-bottom:14px;">Popular Categories</h3>
+        <div class="admin-table-wrapper">
+          <table class="admin-table" id="popular-categories-table">
+            <thead><tr><th>Category</th><th>Events</th></tr></thead>
+            <tbody><tr><td colspan="2">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <h3 class="mt-16" style="margin-bottom:14px;">Upcoming Events</h3>
+        <div class="admin-table-wrapper">
+          <table class="admin-table" id="upcoming-events-table">
+            <thead><tr><th>Event</th><th>Date</th><th>City</th></tr></thead>
+            <tbody><tr><td colspan="3">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="../js/api.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/admin.js"></script>
+</body>
+</html>
