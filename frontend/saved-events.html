@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saved Events — Smart Event Finder</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+<nav class="navbar" id="main-navbar">
+  <div class="container">
+    <a href="index.html" class="brand">Smart<span class="dot">Event</span>Finder</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="events.html">Explore Events</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="my-events.html">My Events</a></li>
+      <li><a href="saved-events.html" class="active">Saved</a></li>
+    </ul>
+    <div class="nav-actions" id="nav-actions"></div>
+    <button class="hamburger" id="hamburger-btn"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<main class="container section">
+  <div class="section-head"><h2>Saved Events</h2></div>
+  <div class="events-grid" id="saved-grid"><div class="spinner"></div></div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="bottom-bar">© 2026 Smart Event Finder. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/common.js"></script>
+<script>
+async function loadSaved() {
+  const grid = document.getElementById('saved-grid');
+  try {
+    const res = await api.get('/bookmarks');
+    if (res.data.length === 0) {
+      grid.innerHTML = `<div class="state-box"><h3>No saved events.</h3><p>Browse events and tap the heart icon to save them here.</p></div>`;
+      return;
+    }
+    const ids = new Set(res.data.map((b) => b.id));
+    grid.innerHTML = res.data.map((evt) => eventCardHtml(evt, ids)).join('');
+    attachBookmarkHandlers(grid, (eventId, isNowBookmarked) => {
+      if (!isNowBookmarked) {
+        // Remove the card immediately from the saved-events view
+        const card = grid.querySelector(`[data-event-id="${eventId}"]`);
+        if (card) card.remove();
+        if (grid.children.length === 0) {
+          grid.innerHTML = `<div class="state-box"><h3>No saved events.</h3><p>Browse events and tap the heart icon to save them here.</p></div>`;
+        }
+      }
+    });
+  } catch (err) {
+    grid.innerHTML = `<div class="state-box"><h3>Unable to load saved events.</h3><p>Please try again.</p></div>`;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (!requireAuth()) return;
+  loadSaved();
+});
+</script>
+</body>
+</html>
